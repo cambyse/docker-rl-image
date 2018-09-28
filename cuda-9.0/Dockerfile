@@ -53,20 +53,6 @@ RUN conda install -y h5py=2.8.0 \
  && conda clean -ya
 RUN pip install h5py-cache==1.0
 
-# Install make
-RUN sudo apt-get update && sudo apt-get install -y build-essential \
-                                                   cmake \
-                                                   libz-dev
-
-# Cython (necessary for some gym envs)
-RUN pip install Cython
-
-# Install Gym
-RUN pip install gym[atari]
-
-# Install Tensor board
-RUN pip install tensorboardX
-
 # Install Torchnet, a high-level framework for PyTorch
 RUN pip install torchnet==0.0.4
 
@@ -86,6 +72,26 @@ RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
  && sudo rm -rf /var/lib/apt/lists/*
 RUN conda install -y -c menpo opencv3=3.1.0 \
  && conda clean -ya
+
+# Install make
+RUN sudo apt-get update && sudo apt-get install -y build-essential \
+                                                   cmake \
+                                                   libz-dev
+
+# Cython (necessary for some gym envs)
+RUN pip install Cython
+
+# Install Gym
+RUN pip install gym[atari]
+
+# Install Tensor board
+RUN pip install tensorboardX
+
+# Install Tensor flow
+RUN pip install tensorflow
+
+# Expose the application on port
+EXPOSE 6006
 
 # Set the default command to python3
 #CMD ["python3"]
